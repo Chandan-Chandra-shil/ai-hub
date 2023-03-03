@@ -15,19 +15,22 @@ const showTools = (tools) => {
 
     div.classList.add("col");
     div.innerHTML = `
-    <div class="border p-3 rounded-2 h">
+    <div class="border p-3 rounded-2 ">
     <img src="${tool.image}" class="card-img-top " alt="...">
        <h5 class="card-title mb-1">Features: <br></h5>
-  <div class="card-body">
+  <div class="card-body p-0 m-0">
     <li> ${tool.features[0]}</li>
     <li> ${tool.features[1]}</li>
     <li> ${tool.features[2]}</li>
     </div>
     <hr>
+    <div class="d-flex justify-content-between">
     <div>
-       <div class="">
-        <h5 class="card-title mb-1">${tool.name} <br></h5>
-        <h6 class="card-title mb-1">${tool.published_in} <br></h6>
+     <h5 class="card-title mb-1">${tool.name} <br></h5>
+      <h6 class="card-title mb-1">${tool.published_in} <br></h6>
+    </div>
+    <div id="" class=""><button>Details</button></div>
+       
   
     </div>
      
