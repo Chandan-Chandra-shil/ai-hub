@@ -1,24 +1,20 @@
-const loadTools = async () => {
-  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+
+const loadTools = () => {
+  //async
+  /*  const url = `https://openapi.programming-hero.com/api/ai/tools`;
   const res = await fetch(url);
   const data = await res.json();
-  showTools(data.data.tools);
+  showTools(data.data.tools); */
+  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) =>  
+    showTools(data.data.tools.slice(0, 6)));
 };
 
 const showTools = (tools) => {
   const toolsContainer = document.getElementById("tools-container");
-  
   toolsContainer.innerHTML = "";
-  if (tools.length ) {
-    tools = tools.slice(0, 6);
-  }
-  else {
-    const showALL = document.getElementById('show-all').addEventListener('click', function () {
-      
-    
-  })
-  }
-
   
   
   tools.forEach((tool) => {
@@ -46,8 +42,10 @@ const showTools = (tools) => {
            } <br>
         </h6>
       </div>
-      <div class="border  rounded-4 p-3 bg-danger-subtle">
-        <ion-icon name="arrow-forward-outline"></ion-icon>
+      <div  class="border  rounded-4 p-3 bg-danger-subtle">
+          <span  data-bs-toggle="modal" data-bs-target="#moreDetails">
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </span>
        </div>
        </div>
    </div>
@@ -61,15 +59,26 @@ const showTools = (tools) => {
 
 };
 
+// onload function hare 
+// const waitingSpinner = isLoading => {
+//   const waitingYou = document.getElementById('waiting-you');
+//   if (isLoading) {
+//     waitingYou.classList.remove('d-none');
+//   }
+//   else {
+//     waitingYou.classList.add('d-none');
+//   }
+  
+// }
 
-const waitingSpinner = isLoading => {
-  const waitingYou = document.getElementById('waiting-you');
-  if (isLoading) {
-    waitingYou.classList.remove('d-none');
-  }
-  else {
-    waitingYou.classList.add('d-none');
-  }
+// all data show function hare 
+const showAllData = () => {
+  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+  fetch(url)
+  .then((res) => res.json())
+  .then((data) => showTools(data.data.tools));
+  
+  
   
 }
 
