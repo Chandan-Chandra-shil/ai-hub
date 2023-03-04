@@ -19,10 +19,10 @@ const moreDetails = (id) => {
 };
 
 const moreDetailsDisplay = (detail) => {
-  console.log(detail.data.image_link);
+  console.log(detail.data.accuracy.score);
   const moreDetailsModal = document.getElementById("more-detail-modal");
   moreDetailsModal.innerHTML = `
-    <div class="bg-info-subtle d-flex gap-2">
+    <div class="  d-flex gap-2">
          <div class=" w-50 bg-danger-subtle border border-danger rounded p-5 ">
          <h4 class="mb-4">${detail.data.description}</h4>
          <div class="d-flex gap-2 text-center  fw-semibold ">
@@ -59,7 +59,9 @@ const moreDetailsDisplay = (detail) => {
         </div>
           </div>
         
-        <div class=" w-50  rounded border  p-4 border border-success" >
+      <div class=" w-50  rounded border bg-light  p-4 border border-success" >
+        <span class="btn btn-danger px-5 py-2 fw-semibold sticky-top position-absolute top-0 end-0">${detail.data.accuracy.score} Accuracy</span>
+         <img class="img-fluid" src="${detail.data.image_link[0]}" alt="">
          
         </div>
    </div>
