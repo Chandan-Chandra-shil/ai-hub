@@ -1,4 +1,3 @@
-
 const loadTools = () => {
   //async
   /*  const url = `https://openapi.programming-hero.com/api/ai/tools`;
@@ -8,42 +7,71 @@ const loadTools = () => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) =>  
-    showTools(data.data.tools.slice(0, 6)));
+    .then((data) => showTools(data.data.tools.slice(0, 6)));
 };
 
-// modal more details 
-const moreDetails = () => {
-  const url = 'https://openapi.programming-hero.com/api/ai/tool/01';
+// modal more details
+const moreDetails = (id) => {
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => moreDetailsDisplay(data));
-}
-   
-const moreDetailsDisplay = detail => {
-  console.log(detail);
+};
+
+const moreDetailsDisplay = (detail) => {
+  console.log(detail.data.image_link);
   const moreDetailsModal = document.getElementById("more-detail-modal");
   moreDetailsModal.innerHTML = `
-    <div class="bg-info-subtle d-flex gap-5">
-         <div class=" w-50  rounded p-5 border border-danger">
-         
-         </div>
+    <div class="bg-info-subtle d-flex gap-2">
+         <div class=" w-50 bg-danger-subtle border border-danger rounded p-5 ">
+         <h4 class="mb-4">${detail.data.description}</h4>
+         <div class="d-flex gap-2 text-center  fw-semibold ">
+            <div class="bg-light border text-success  fs-4 rounded  ">
+            <span>${detail.data.pricing[0].price} </span>
+            <span>${detail.data.pricing[0].plan} </span>
 
-        <div class=" w-50  rounded border  p-5 border border-success" >
+            </div>
+            <div class="bg-light border rounded  text-warning fs-4  ">
+              <span>${detail.data.pricing[1].price}</span>
+              <span>${detail.data.pricing[1].plan}</span>
+              
+            </div>
+             <div class="bg-light border rounded text-danger fs-4  ">
+             
+             <span>${detail.data.pricing[2].price}</span>
+             <span>${detail.data.pricing[2].plan}</span>
+             </div>
+            </div>
+            <div class="d-flex justify-content-between">
+            <div>
+                <h4>Features</h4>
+                <li>${detail.data.features[1].feature_name}</li>
+                <li>${detail.data.features[2].feature_name}</li>
+                <li>${detail.data.features[3].feature_name}</li>
+                
+            </div>        
+            <div>
+              <h4>Integrations</h4>
+               <li>${detail.data.integrations[0]}</li>
+                <li>${detail.data.integrations[1]}</li>
+                <li>${detail.data.integrations[2]}</li>
+            </div>        
+        </div>
+          </div>
         
+        <div class=" w-50  rounded border  p-4 border border-success" >
+         
         </div>
    </div>
  
   `;
-
-}
+};
 
 moreDetails();
 
 const showTools = (tools) => {
   const toolsContainer = document.getElementById("tools-container");
   toolsContainer.innerHTML = "";
-  
   
   tools.forEach((tool) => {
     console.log();
@@ -71,7 +99,8 @@ const showTools = (tools) => {
         </h6>
       </div>
       <div  class="border  rounded-4 p-3 bg-danger-subtle">
-          <span onclick="moreDetails()" data-bs-toggle="modal" data-bs-target="#moreDetails"">
+          <span onclick="moreDetails('${tool.id}')" 
+          data-bs-toggle="modal" data-bs-target="#moreDetails"">
               <ion-icon name="arrow-forward-outline"></ion-icon>
             </span>
             
@@ -84,12 +113,9 @@ const showTools = (tools) => {
     `;
     toolsContainer.appendChild(div);
   });
-
-
-
 };
 
-// onload function hare 
+// onload function hare
 // const waitingSpinner = isLoading => {
 //   const waitingYou = document.getElementById('waiting-you');
 //   if (isLoading) {
@@ -98,18 +124,15 @@ const showTools = (tools) => {
 //   else {
 //     waitingYou.classList.add('d-none');
 //   }
-  
+
 // }
 
-// all data show function hare 
+// all data show function hare
 const showAllData = () => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
-  .then((res) => res.json())
-  .then((data) => showTools(data.data.tools));
-  
-  
-  
-}
+    .then((res) => res.json())
+    .then((data) => showTools(data.data.tools));
+};
 
 loadTools();
