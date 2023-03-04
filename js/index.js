@@ -19,7 +19,7 @@ const moreDetails = (id) => {
 };
 
 const moreDetailsDisplay = (detail) => {
-  console.log(detail.data.accuracy.score);
+  console.log(detail.data);
   const moreDetailsModal = document.getElementById("more-detail-modal");
   moreDetailsModal.innerHTML = `
     <div class="  d-flex gap-2">
@@ -60,8 +60,17 @@ const moreDetailsDisplay = (detail) => {
           </div>
         
       <div class=" w-50  rounded border bg-light  p-4 border border-success" >
-        <span class="btn btn-danger px-5 py-2 fw-semibold sticky-top position-absolute top-0 end-0">${detail.data.accuracy.score} Accuracy</span>
+        <span class="btn btn-danger px-5 py-2 fw-semibold sticky-top position-absolute top-0 end-0">${
+          detail.data.accuracy.score
+            ? detail.data.accuracy.score
+            : "No Found Accuracy!"
+        } Accuracy</span>
          <img class="img-fluid" src="${detail.data.image_link[0]}" alt="">
+        
+        <h2 class="fs-3 fw-bold mt-5 text-center">${
+          detail.data.input_output_examples[0].input
+        }</h2>
+        <p class="text-center fs-5">${detail.data.input_output_examples[1].output}</p>
          
         </div>
    </div>
