@@ -12,6 +12,34 @@ const loadTools = () => {
     showTools(data.data.tools.slice(0, 6)));
 };
 
+// modal more details 
+const moreDetails = () => {
+  const url = 'https://openapi.programming-hero.com/api/ai/tool/01';
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => moreDetailsDisplay(data));
+}
+   
+const moreDetailsDisplay = detail => {
+  console.log(detail);
+  const moreDetailsModal = document.getElementById("more-detail-modal");
+  moreDetailsModal.innerHTML = `
+    <div class="bg-info-subtle d-flex gap-5">
+         <div class=" w-50  rounded p-5 border border-danger">
+         
+         </div>
+
+        <div class=" w-50  rounded border  p-5 border border-success" >
+        
+        </div>
+   </div>
+ 
+  `;
+
+}
+
+moreDetails();
+
 const showTools = (tools) => {
   const toolsContainer = document.getElementById("tools-container");
   toolsContainer.innerHTML = "";
@@ -43,12 +71,14 @@ const showTools = (tools) => {
         </h6>
       </div>
       <div  class="border  rounded-4 p-3 bg-danger-subtle">
-          <span  data-bs-toggle="modal" data-bs-target="#moreDetails">
+          <span onclick="moreDetails()" data-bs-toggle="modal" data-bs-target="#moreDetails"">
               <ion-icon name="arrow-forward-outline"></ion-icon>
             </span>
+            
        </div>
        </div>
    </div>
+   
     
   
     `;
